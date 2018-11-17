@@ -135,31 +135,36 @@ public class Sheduler{
 	
 	public static ArrayList<TimeSlot> isTimeSlotFree(ArrayList<ArrayList<TimeSlot>> usersList,int duration) {
 		
-		ArrayList slotList = new ArrayList<TimeSlot>();
+		ArrayList<TimeSlot> slotList = new ArrayList<TimeSlot>();
 		
 		
 		
-		for(ArrayList<TimeSlot> temp: usersList) {
+		
+		
+		for(int i=0;i<usersList.size();i++) {
 			
-			for(TimeSlot t: temp) {
-				slotList.add(t);
+			ArrayList<TimeSlot> top = usersList.get(i);
+			
+			for(int j=0 ; j<usersList.size()&& i!=j ; j++) {
+				
+				ArrayList<TimeSlot> bot = usersList.get(j);
+				
+				for(TimeSlot s1: top) {
+					for(TimeSlot s2: bot) {
+						if(s1.start == s2.start && s1.end == s2.end) {
+							slotList.add(s2);
+						}
+					}
+					
+				}
 			}
 			
 		}
 		
 		for(int i=0; i< slotList.size();i++) {
-			TimeSlot t = (TimeSlot) slotList.get(i);
 			
-			for(int j=i+1;i<slotList.size();i++) {
-				
-				TimeSlot k = (TimeSlot) slotList.get(j);
-				
-				if(t.start >= k.start) {
-					if(t.start - k.end > 0 && t.start - k.end >= duration) {
-						
-					}
-				}
-			}
+			System.out.println("["+slotList.get(i).start+","+slotList.get(i).end+"]");
+			
 		}
 		
 		
@@ -234,7 +239,9 @@ public class Sheduler{
 		
 		finallist.add(result);
 		
-		System.out.println(finallist);
+		isTimeSlotFree(finallist, 2);
+		
+		//System.out.println(finallist);
 		
 		
 	
