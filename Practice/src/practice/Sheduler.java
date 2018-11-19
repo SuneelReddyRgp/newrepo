@@ -15,12 +15,7 @@ class TimeSlot{
 	public TimeSlot(int a,int b){
 		start = a;
 		end = b;
-	}
-	
-	
-	
-	
-	
+	}	
 }
 
 public class Sheduler{
@@ -41,6 +36,7 @@ public class Sheduler{
 		ArrayList result = new ArrayList<>();
 		
 		
+		System.out.println(Name+",  Available time slots");
 		for(int i=0;i<currentMeetings.size();i++) {
 			
 			set1 = currentMeetings.get(i);
@@ -54,12 +50,14 @@ public class Sheduler{
 			int start = (int) set1.get(1);
 			int end = (int) set2.get(0);
 			
+			
+			
 			if(end - start >= duration &&  prefStart <= start && PrefEnd >= end) {
 	
 				addToList(start,end,result);
 
 				
-				System.out.println("["+start+","+end+"]");
+				System.out.print("["+start+","+end+"]");
 
 				
 				if(i+2 == currentMeetings.size()) {
@@ -79,7 +77,7 @@ public class Sheduler{
 								for(int k=0 ; ;k++) {
 		
 									addToList(val1,(val1+duration),result);
-									System.out.println("(["+val1+","+(val1+duration)+"])");
+									System.out.print("  ["+val1+","+(val1+duration)+"]  ");
 									
 									val1 += duration;
 									
@@ -100,17 +98,16 @@ public class Sheduler{
 							}else if(val2-val1==duration){
 								
 								addToList(val1,val2,result);
-								System.out.println("["+val1+","+(val2)+"]");
+								System.out.print("   ["+val1+","+(val2)+"]   ");
 								
 							}
-							
-						
-							
-							
-							
-							
+								
 							
 						}
+						
+						System.out.println("");
+						
+						System.out.println("");
 				
 				return result;
 					
@@ -120,9 +117,6 @@ public class Sheduler{
 		}
 
 
-		
-		
-		
 		return result;
 		
 	}
@@ -136,10 +130,7 @@ public class Sheduler{
 	public static ArrayList<TimeSlot> isTimeSlotFree(ArrayList<ArrayList<TimeSlot>> usersList,int duration) {
 		
 		ArrayList<TimeSlot> slotList = new ArrayList<TimeSlot>();
-		
-		
-		
-		
+
 		
 		for(int i=0;i<usersList.size();i++) {
 			
@@ -161,9 +152,12 @@ public class Sheduler{
 			
 		}
 		
+		System.out.println("Available time slots for all users to meet");
+		
 		for(int i=0; i< slotList.size();i++) {
 			
-			System.out.println("["+slotList.get(i).start+","+slotList.get(i).end+"]");
+			
+			System.out.print("["+slotList.get(i).start+","+slotList.get(i).end+"]");
 			
 		}
 		
@@ -179,6 +173,8 @@ public class Sheduler{
 		
 		ArrayList<ArrayList<TimeSlot>> finallist = new ArrayList<ArrayList<TimeSlot>>();
 		ArrayList<ArrayList> currentMeetings = new ArrayList<>();
+		
+		int duration = 2;
 		
 		ArrayList pref = new ArrayList<>();
 		
@@ -212,7 +208,8 @@ public class Sheduler{
 		
 
 		
-		result =	getTimeSlot("sun",pref,currentMeetings,2);
+		result =	getTimeSlot("suneel",pref,currentMeetings,duration);
+		
 		finallist.add(result);
 		currentMeetings.clear();
 		temp.clear();
@@ -235,29 +232,15 @@ public class Sheduler{
 		currentMeetings.add(temp1);
 		
 		
-		result =	getTimeSlot("sun",pref,currentMeetings,2);
+		result =	getTimeSlot("reddy",pref,currentMeetings,duration);
 		
 		finallist.add(result);
 		
-		isTimeSlotFree(finallist, 2);
+		isTimeSlotFree(finallist, duration);
 		
 		//System.out.println(finallist);
-		
-		
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
 
-	
-	
 }
